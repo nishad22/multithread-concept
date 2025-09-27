@@ -8,5 +8,8 @@ public class SampleExample {
         var v2 = new Thread(new RunnableExample2());
         v1.start();
         v2.start();
+
+        var v3 = new ThreadExample();
+        v3.run();
     }
 }
