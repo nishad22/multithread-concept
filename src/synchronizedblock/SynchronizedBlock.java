@@ -12,6 +12,7 @@ public class SynchronizedBlock {
     Object lock2 = new Object();
 
     private void increment() {
+        //Object level locking
         synchronized (lock1){
             count++;
         }
