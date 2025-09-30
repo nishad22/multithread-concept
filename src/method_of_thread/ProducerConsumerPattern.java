@@ -15,23 +15,23 @@ public class ProducerConsumerPattern {
             wait();
         }
         System.out.println("Adding items with producer");
-        for (int i = 0; i<capacity;i++){
+        for (int i = 0; i < capacity; i++) {
             buffer.add(i);
-            System.out.println("Added value: "+i);
+            System.out.println("Added value: " + i);
         }
         //wake to notify the consumer
         notify();
     }
 
     public synchronized void consumer() throws InterruptedException {
-        if (buffer.size()<capacity){
+        if (buffer.size() < capacity) {
             System.out.println("Buffer is not full yet and waiting for consumer: ");
             wait();
         }
 
-        while (!buffer.isEmpty()){
+        while (!buffer.isEmpty()) {
             int item = buffer.remove(0);
-            System.out.println("Consumer removes: "+item);
+            System.out.println("Consumer removes: " + item);
             Thread.sleep(300);
         }
         notify();
@@ -39,18 +39,18 @@ public class ProducerConsumerPattern {
 
     static class Consumer implements Runnable {
         private ProducerConsumerPattern producerConsumerPattern;
-         public Consumer(ProducerConsumerPattern producerConsumerPattern){
-             this.producerConsumerPattern = producerConsumerPattern;
-         }
+
+        public Consumer(ProducerConsumerPattern producerConsumerPattern) {
+            this.producerConsumerPattern = producerConsumerPattern;
+        }
 
 
         @Override
         public void run() {
             while (true) {
                 try {
-                    while (true){
-                        this.producerConsumerPattern.consumer();
-                    }
+
+                    this.producerConsumerPattern.consumer();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -60,7 +60,8 @@ public class ProducerConsumerPattern {
 
     static class Producer implements Runnable {
         private ProducerConsumerPattern producerConsumerPattern;
-        public Producer(ProducerConsumerPattern producerConsumerPattern){
+
+        public Producer(ProducerConsumerPattern producerConsumerPattern) {
             this.producerConsumerPattern = producerConsumerPattern;
         }
 
@@ -68,9 +69,7 @@ public class ProducerConsumerPattern {
         public void run() {
             while (true) {
                 try {
-                    while (true){
-                        this.producerConsumerPattern.producer();
-                    }
+                    this.producerConsumerPattern.producer();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
