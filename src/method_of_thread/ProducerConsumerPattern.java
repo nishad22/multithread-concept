@@ -1,6 +1,5 @@
 package method_of_thread;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,43 +35,43 @@ public class ProducerConsumerPattern {
         }
         notify();
     }
+}
 
-    static class Consumer implements Runnable {
-        private ProducerConsumerPattern producerConsumerPattern;
+class Consumer implements Runnable {
+    private ProducerConsumerPattern producerConsumerPattern;
 
-        public Consumer(ProducerConsumerPattern producerConsumerPattern) {
-            this.producerConsumerPattern = producerConsumerPattern;
-        }
+    public Consumer(ProducerConsumerPattern producerConsumerPattern) {
+        this.producerConsumerPattern = producerConsumerPattern;
+    }
 
 
-        @Override
-        public void run() {
-            while (true) {
-                try {
+    @Override
+    public void run() {
+        while (true) {
+            try {
 
-                    this.producerConsumerPattern.consumer();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                this.producerConsumerPattern.consumer();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
+}
 
-    static class Producer implements Runnable {
-        private ProducerConsumerPattern producerConsumerPattern;
+class Producer implements Runnable {
+    private ProducerConsumerPattern producerConsumerPattern;
 
-        public Producer(ProducerConsumerPattern producerConsumerPattern) {
-            this.producerConsumerPattern = producerConsumerPattern;
-        }
+    public Producer(ProducerConsumerPattern producerConsumerPattern) {
+        this.producerConsumerPattern = producerConsumerPattern;
+    }
 
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    this.producerConsumerPattern.producer();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                this.producerConsumerPattern.producer();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
