@@ -32,7 +32,13 @@ public class FibonnaciRecusiveTask extends RecursiveTask<Integer> {
         f1.fork();
         f2.fork();
 
-        return f1.join() +f2.join();
+        //return f1.join() +f2.join();
+
+        //the above will replaced with and below is the optimized way
+        //where actual thread will execute the one part
+        //another thread will associate with f2.
+
+        return  f1.compute() + f2.join();
     }
 
     public static void main(String[] args) {
