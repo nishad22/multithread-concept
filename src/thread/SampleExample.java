@@ -9,6 +9,7 @@ public class SampleExample {
         v1.start();
         v2.start();
 
+        //created thread by using Thread class
         var v3 = new ThreadExample();
         v3.run();
     }
