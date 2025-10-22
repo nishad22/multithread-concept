@@ -2,7 +2,6 @@ package session;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.CountDownLatch;
 
 public class ArrayBlockingQueueExample {
 
@@ -15,7 +14,7 @@ public class ArrayBlockingQueueExample {
     }
 
     void producer() throws InterruptedException {
-        for (int i = 0; i < 10;i++) {
+        for (int i = 1; i <= 10; i++) {
             queue.put(i);
 //            System.out.println("Produced: " + i + " | Queue size: " + queue.size());
         }
@@ -26,15 +25,17 @@ public class ArrayBlockingQueueExample {
     }
 
     void consumer() throws InterruptedException {
-//        System.out.println("remove element: "+queue.take());
+        System.out.println("remove element: "+queue.take());
         while (true) {
             Integer ele = queue.take();
-            if (ele.equals(breaker)){
+            if (ele.equals(breaker)) {
                 break;
             }
             System.out.println(ele);
             Thread.sleep(100);
         }
+//        System.out.println("remove element: "+queue.take());
+
     }
 
     static void main() throws InterruptedException {
@@ -57,8 +58,7 @@ public class ArrayBlockingQueueExample {
                 arrayBlockingQueueExample.consumer();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
-            }
-            finally {
+            } finally {
 //                count.countDown();
             }
         };

@@ -9,12 +9,12 @@ public class AtomicVariableExample {
     public static void main(String[] args) throws InterruptedException {
 
         Runnable r1 = () -> {
-            for (int i=0;i<1000;i++)
+            for (int i = 0; i < 1000; i++)
                 increment();
         };
 
         Runnable r2 = () -> {
-            for (int i=0;i<1000;i++)
+            for (int i = 0; i < 1000; i++)
                 increment();
         };
 
@@ -27,7 +27,7 @@ public class AtomicVariableExample {
         t1.join();
         t2.join();
 
-        System.out.println("the counter value: "+count);
+        System.out.println("the counter value: " + count);
     }
 
     private static void increment() {
