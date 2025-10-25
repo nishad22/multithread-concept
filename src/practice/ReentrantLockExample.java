@@ -45,7 +45,9 @@ public class ReentrantLockExample {
             Thread.sleep(1000);
             System.out.println("signal() call from consumer: ");
             isReady = false;
-            condition.signal(); //wake up producer
+            condition.signal();//wake up producer
+            System.out.println("consumer completed operation: ");
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
