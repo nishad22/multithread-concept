@@ -8,6 +8,8 @@ public class ArrayBlockingQueueExample {
     private BlockingQueue<Integer> queue;
     private static final int breaker = -1;
 
+//    private BlockingQueue<Integer> array = new ArrayBlockingQueue<>(10);
+
     public ArrayBlockingQueueExample(BlockingQueue<Integer> queue) {
         this.queue = queue;
 //        this.capacity = capacity;
@@ -16,23 +18,20 @@ public class ArrayBlockingQueueExample {
     void producer() throws InterruptedException {
         for (int i = 1; i <= 10; i++) {
             queue.put(i);
-//            System.out.println("Produced: " + i + " | Queue size: " + queue.size());
+            System.out.println("Produced: " + i + " | Queue size: " + queue.size());
         }
-        Thread.sleep(100);
-//        System.out.println(queue);
+        Thread.sleep(1000);
+        System.out.println(queue);
         // Add poison pill to signal consumer to stop
-        queue.put(breaker);
+//        queue.put(breaker);
     }
 
     void consumer() throws InterruptedException {
-        System.out.println("remove element: "+queue.take());
-        while (true) {
+//        System.out.println("remove element: "+queue.take());
+        while (!queue.isEmpty()) {
             Integer ele = queue.take();
-            if (ele.equals(breaker)) {
-                break;
-            }
-            System.out.println(ele);
-            Thread.sleep(100);
+            Thread.sleep(1000);
+            System.out.println("element remove from head: "+ele+" size of queue: "+queue.size());
         }
 //        System.out.println("remove element: "+queue.take());
 
